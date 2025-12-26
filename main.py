@@ -22,8 +22,8 @@ SCREEN_HEIGHT = 600
 FPS = 30
 
 # Cesty
-IMG_FOLDER = resource_path("obrazky_stylizovane")
-MAP_FILE = resource_path("data/mapa.json")
+IMG_FOLDER = resource_path("obrazky_optimalizovane")
+DATA_PATH = resource_path("data/mapa.json")
 UI_BG_PATH = resource_path("assets/ui_bg.png")
 DICE_SHEET_PATH = resource_path("assets/dice_sheet.png")
 MUSIC_PATH = resource_path("assets/music.mp3")
@@ -77,14 +77,14 @@ if os.path.exists(btn_continue_img_path):
     btn_continue_img = pygame.image.load(btn_continue_img_path).convert_alpha()
 
 # Načtení mapy větvení
-if not os.path.exists(os.path.dirname(MAP_FILE)):
-    os.makedirs(os.path.dirname(MAP_FILE))
+if not os.path.exists(os.path.dirname(DATA_PATH)):
+    os.makedirs(os.path.dirname(DATA_PATH))
 
-if not os.path.exists(MAP_FILE):
-    with open(MAP_FILE, "w", encoding="utf-8") as f:
+if not os.path.exists(DATA_PATH):
+    with open(DATA_PATH, "w", encoding="utf-8") as f:
         json.dump({}, f)
 
-with open(MAP_FILE, "r", encoding="utf-8") as f:
+with open(DATA_PATH, "r", encoding="utf-8") as f:
     try:
         story_map = json.load(f)
     except json.JSONDecodeError:
@@ -95,7 +95,7 @@ if not os.path.exists(IMG_FOLDER):
     os.makedirs(IMG_FOLDER)
 
 images = []
-image_files = sorted([f for f in os.listdir(IMG_FOLDER) if f.endswith(".png")], key=extract_number)
+image_files = sorted([f for f in os.listdir(IMG_FOLDER) if f.lower().endswith(".jpg")], key=extract_number)
 total_files = len(image_files)
 
 # LOADING SCREEN
@@ -155,7 +155,8 @@ roll_start_time = 0
 roll_duration = 1200 # mírně delší pro efekt
 
 async def main():
-    global current_page, page_dice_rolled, show_dice_result, dice_value, is_rolling, roll_start_time, debug_mode
+    global current_page, page_dice_rolled, show_dice_result, dice_value, is_rolling, roll_start_time, debug_mode, \
+           continue_button_active, continue_button_click_rect, dice_button_active, dice_button_click_rect
     running = True
     while running:
         current_time = pygame.time.get_ticks()

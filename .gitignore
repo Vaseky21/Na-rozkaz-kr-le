@@ -6,7 +6,6 @@ __pycache__/
 # Distribution / Build
 build/
 dist/
-*.spec
 
 # Virtual Environment
 venv/
@@ -20,5 +19,11 @@ Thumbs.db
 # Project specific
 *.pdf
 obrazky_hra1/
+obrazky_stylizovane/
 obrazky_stylizovane1/
 * - kopie.py
+
+# Optimized assets (ALLOW THESE)
+!obrazky_optimalizovane/
+!assets/
+!data/
