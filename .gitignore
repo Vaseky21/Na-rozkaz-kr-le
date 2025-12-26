@@ -4,8 +4,8 @@ __pycache__/
 *$py.class
 
 # Distribution / Build
-build/
-dist/
+# build/  <- Removded to allow PWA
+# dist/   <- Removed to allow EXE
 
 # Virtual Environment
 venv/
@@ -27,3 +27,7 @@ obrazky_stylizovane1/
 !obrazky_optimalizovane/
 !assets/
 !data/
+
+# Allow Applications
+!dist/na_rozkaz_krale.exe
+!build/web/
